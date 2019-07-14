@@ -85,8 +85,16 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 		//2. Use a switch statement to determine which difficulty was chosen.
 		//   Use timer.setDelay(delay) with different numbers to change the speed
 		//   of the game. The smaller the number, the faster it goes.
-
+		switch(choice) {
+		case "Expert":
+			timer.setDelay(5);
+		case "Moderate":
+			timer.setDelay(7);
+		case "Beginner":
+			timer.setDelay(10);
+		}
 		//3. start the timer
+		timer.start();
 	}
 
 	public static void main(String[] args) {
@@ -103,6 +111,21 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		//1. Use a switch statement on e.getKeyCode()
 		//   to determine which key was pressed.
+		switch(e.getKeyCode()) {
+		case e.VK_UP:
+			snake.setDirection(Direction.UP);
+		case e.VK_DOWN:
+			snake.setDirection(Direction.DOWN);
+		case e.VK_RIGHT:
+			snake.setDirection(Direction.RIGHT);
+		case e.VK_LEFT:
+			snake.setDirection(Direction.LEFT);
+		case e.VK_SPACE:
+			snake.feed();
+			default:
+				
+				
+		}
 		
 		// if an arrow key is pressed, set the snake's 
 		// direction accordingly
@@ -113,20 +136,26 @@ public class _00_SnakeGame implements ActionListener, KeyListener {
 
 	private void setFoodLocation() {
 		//1. Create a new Location object that is set to a random location
-		
+		Random r = new Random();
+	int x = r.nextInt();
+	int y = r.nextInt();
+	Location l = new Location(x,y);
 		//2. set the foodLocation variable equal to the Location object you just created.
 		//   use the snake's isLocationOnSnake method to make sure you don't put the food on the snake
+	if(snake.isLocationOnSnake(foodLocation)!=true) {
+		foodLocation = l;
+	}
 		
 	}
 
 	private void gameOver() {
 		
 		//1. stop the timer
-		
+		timer.stop();
 		//2. tell the user their snake is dead
-		
+		System.out.println("YOu snake is dead");
 		//3. ask them if they want to play again.
-		
+		String playAgain = JOptionPane.showInputDialog("Do you want to play again");
 		//4. if they want to play again
 		//   reset the snake and the food and start the timer
 		//   else, exit the game

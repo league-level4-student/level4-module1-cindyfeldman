@@ -31,7 +31,17 @@ public class ArrayList <T>{
 		}
 
 	else {
-		h[loc] = val;
+	
+
+		for (int i = 0; i < h.length; i++) {
+			if(i==loc) {
+				h[loc] = val;
+			}
+			else if(i<loc) {
+			h[i] = h[i];
+			}
+		}
+		
 	}
 	}
 	
@@ -41,12 +51,19 @@ public class ArrayList <T>{
 		}
 	
 	else {
+		
 		h[loc] = val;
 	}
 	}
 	
 	public void remove(int loc) throws IndexOutOfBoundsException {
-		
+		T[] n = (T[]) new Object[h.length-1];
+		for (int i = 0; i < h.length; i++) {
+			if(i<loc) {
+				n[i] = h[i];
+			}
+		}
+		h = n;
 	}
 	
 	public boolean contains(T val) {
